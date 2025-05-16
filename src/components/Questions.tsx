@@ -1,27 +1,65 @@
-import React, { useState } from 'react'
-import { data } from "../data.ts"
+import React, { useState } from 'react';
+import { data } from '../data.ts';
+import { useHistory } from 'react-router-dom';
 
-function Questions() {
-  const [answers, setAnswers] = useState<{ [key: number]: number }>({});
+type TestProps = {
+  handleScoreChange: (score: number) => void;
+};
 
+function Questions({ handleScoreChange }: TestProps) {
+  const [answers, setAnswers] = useState<number[]>(Array(data.length).fill(0));
+const history = useHistory();
+  const handleAnswerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    const questionIndex = parseInt(name.split('-')[1]);
+    const answerValue = parseInt(value);
+
+    setAnswers(prev => {
+      const newAnswers = [...prev];
+      newAnswers[questionIndex] = answerValue;
+      return newAnswers;
+    });
+  };
+
+  const calculateTotalScore = () => {
+    return answers.reduce((acc, curr) => acc + curr, 0);
+  };
+
+  const onSubmit = () => {
+    const totalScore = calculateTotalScore();
+    handleScoreChange(totalScore);
+    history.push('/sonuc');
+    console.log(totalScore);
+    console.log(answers);
+  };
+  
+  
   return (
-<>
-    {data.map((soru: string, i: number) => (<div>
+    <>
+      {data.map((soru: string, i: number) => (
         <div key={i} className='flex flex-col justify-center items-center gap-4 border-2 rounded-lg p-4 my-2 w-[400px] sm:w-[400px] md:w-[550px] lg:w-[800px] mx-auto bg-[#E6EDF4]'>
-            <p className='text-[#2D2D2D]'>{soru}</p>
-            <div className='flex gap-4'>
-              <p className='text-[14px] text-[#D96868]'>Kesinlikle Katılmıyorum</p>
-                <input value={1} name={`question-${i}`} type="radio" />
-                <input value={2} name={`question-${i}`} type="radio" />
-                <input value={3} name={`question-${i}`} type="radio" />
-                <input value={4} name={`question-${i}`} type="radio" />
-                <input value={5} name={`question-${i}`} type="radio" />
-                <p className='text-[14px] text-[#5BA87C]'>Kesinlikle Katılıyorum</p>
-            </div>
+          <p className='text-[#2D2D2D]'>{soru}</p>
+          <div className='flex gap-4'>
+            <p className='text-[14px] text-[#D96868]'>Kesinlikle Katılmıyorum</p>
+            {[1, 2, 3, 4, 5].map(value => (
+              <input
+                key={value}
+                onChange={handleAnswerChange}
+                value={value}
+                name={`question-${i}`}
+                type="radio"
+                checked={answers[i] === value}
+              />
+            ))}
+            <p className='text-[14px] text-[#5BA87C]'>Kesinlikle Katılıyorum</p>
+          </div>
         </div>
-    </div>))}
+      ))}
+      <button onClick={onSubmit} className="btn mt-4">
+        Testi Tamamla
+      </button>
     </>
-  )
+  );
 }
 
-export default Questions
+export default Questions;

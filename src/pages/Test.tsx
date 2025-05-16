@@ -1,14 +1,16 @@
-import React from 'react'
-import Questions from '../components/Questions'
 
-function Test() {
+import Questions from '../components/Questions';
+
+type TestProps = {
+  handleScoreChange: (score: number) => void;
+};
+
+function Test({ handleScoreChange }: TestProps) {
   return (
-    <>
     <div className='flex flex-col items-center h-screen bg-[#F6F6F6]'>
-    <Questions />
+      <Questions handleScoreChange={handleScoreChange} />
     </div>
-    </>
-  )
+  );
 }
 
-export default Test
+export default Test;
