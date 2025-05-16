@@ -36,6 +36,7 @@ const history = useHistory();
   
   return (
     <>
+    <div>
       {data.map((soru: string, i: number) => (
         <div key={i} className='flex flex-col justify-center items-center gap-4 border-2 rounded-lg p-4 my-2 w-[400px] sm:w-[400px] md:w-[550px] lg:w-[800px] mx-auto bg-[#E6EDF4]'>
           <p className='text-[#2D2D2D]'>{soru}</p>
@@ -55,9 +56,12 @@ const history = useHistory();
           </div>
         </div>
       ))}
-      <button onClick={onSubmit} className="btn mt-4">
+      <div className="flex justify-end ">
+      <button onClick={onSubmit} className="mb-8 mt-4 bg-[#5BA87C] rounded-md text-white px-4 py-2 hover:cursor hover:bg-[#4A9B6D] ">
         Testi Tamamla
       </button>
+      </div>
+      </div>
     </>
   );
 }
