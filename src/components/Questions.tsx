@@ -73,6 +73,7 @@ function Questions({ handleScoreChange }: TestProps) {
                 name={`question-${i}`}
                 type="radio"
                 checked={answers[i] === value}
+                className='w-6 h-6'
               />
             ))}
             <p className="text-[14px] text-[#5BA87C]">Kesinlikle Katılıyorum</p>
