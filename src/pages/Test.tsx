@@ -7,7 +7,7 @@ type TestProps = {
 
 function Test({ handleScoreChange }: TestProps) {
   return (
-    <div className='flex flex-col items-center h-screen bg-[#F6F6F6]'>
+    <div className='flex flex-col items-center min-h-screen bg-[#F6F6F6]'>
       <Questions handleScoreChange={handleScoreChange} />
     </div>
   );

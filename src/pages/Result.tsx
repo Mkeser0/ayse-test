@@ -7,7 +7,7 @@ type TestProps = {
 function Result({ score }: TestProps) {
   
   return (
-    <div className="flex flex-col justify-center items-center mt-8 gap-4">
+    <div className="flex flex-col justify-center items-center pt-8 gap-4 h-screen  bg-[#F6F6F6]">
         <p className="text-2xl font-bold">Sonuç</p>
         {score <= 31 && (
             <p className="text-red-700">Testi tamamlamadınız!!</p>

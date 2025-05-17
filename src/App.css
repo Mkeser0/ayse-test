@@ -56,3 +56,6 @@ html {
 :focus {
   outline: none;
 }
+body {
+  font-family: Inter, sans serif;
+}
